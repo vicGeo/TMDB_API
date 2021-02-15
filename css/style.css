@@ -6,6 +6,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
 }
 
 .container-fluid {
@@ -28,12 +29,20 @@
 }
 
 #inputValue {
-    width: 760px;
+    width: 520px;
     font-size: 1rem;
     font-weight: 400;
+    font-size: 1rem;
     margin-top: 1rem;
+    line-height: 1.5rem;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    outline: none;
+    padding: .375rem .75rem;
 }
 
 .btn {
     outline: none;
+    border-radius: .25rem;
+    /* font-weight: bold; */
 }
