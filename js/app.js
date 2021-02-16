@@ -4,6 +4,8 @@ const inputElement = document.querySelector('#inputValue');
 
 //Funcion onclick
 
-buttonElement.onclick = () => {
-    console.log('Click button!');
+buttonElement.onclick = e => {
+    e.preventDefault();
+    const value = inputElement.value;
+    console.log('Value: ', value);
 };
