@@ -22,9 +22,7 @@ const movieSearchable = document.querySelector('#movie-searchable');
 const movieSection = (movieRender) => {
     return movieRender.map((movie) => {
         if (movie.poster_path) {
-        return `
-                <img src=${IMAGE_URL + movie.poster_path} movie-id=${movie.id}/>
-        `;
+            return `<img src=${IMAGE_URL + movie.poster_path} movie-id=${movie.id}/>`;
         }
     });
 };
@@ -46,6 +44,7 @@ const createMovie = (movieRender) => {
 
 const renderMoviesSearch = (data) => {
     // data.results []
+    movieSearchable.innerHTML = '';
     const movies = data.results;
     const movieBlock = createMovie(movies);
     movieSearchable.appendChild(movieBlock);
@@ -66,5 +65,7 @@ buttonElement.onclick = e => {
         .catch((error) => {
             console.log('Error: ', error);
         });
+
+    inputElement.value = '';
     console.log('Value: ', value);
 };

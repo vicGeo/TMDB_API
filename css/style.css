@@ -58,6 +58,7 @@
     transition: transform 1.5s, filter 1s ease-in-out;
     transform-origin: center center;
     filter: brightness(75%);
+    padding: 5px;
 }
 
 .section-movie img:hover {
