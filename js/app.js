@@ -1,5 +1,6 @@
 //Claves de la API TMDB
 const API_KEY = 'ed8717a7e8e8309c83f2ad4db5fbb610';
+const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 
 const url = 'https://api.themoviedb.org/3/search/movie?api_key=ed8717a7e8e8309c83f2ad4db5fbb610&language=es-ES';
 
@@ -20,9 +21,11 @@ const movieSearchable = document.querySelector('#movie-searchable');
 
 const movieSection = (movieRender) => {
     return movieRender.map((movie) => {
+        if (movie.poster_path) {
         return `
-                <img src=https://image.tmdb.org/t/p/w500/${movie.poster_path} movie-id=${movie.id}/>
-            `;
+                <img src=${IMAGE_URL + movie.poster_path} movie-id=${movie.id}/>
+        `;
+        }
     });
 };
 
@@ -41,6 +44,14 @@ const createMovie = (movieRender) => {
     return movieElement;
 }
 
+const renderMoviesSearch = (data) => {
+    // data.results []
+    const movies = data.results;
+    const movieBlock = createMovie(movies);
+    movieSearchable.appendChild(movieBlock);
+    console.log('Data: ', data);
+};
+
 //Función onclick
 
 buttonElement.onclick = e => {
@@ -51,13 +62,7 @@ buttonElement.onclick = e => {
 
     fetch(newUrl)
         .then((res) => res.json())
-        .then((data) => {
-            // data.results []
-            const movies = data.results;
-            const movieBlock = createMovie(movies);
-            movieSearchable.appendChild(movieBlock);
-            console.log('Data: ', data);
-        })
+        .then(renderMoviesSearch)
         .catch((error) => {
             console.log('Error: ', error);
         });
