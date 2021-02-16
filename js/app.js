@@ -7,6 +7,7 @@ const url = 'https://api.themoviedb.org/3/search/movie?api_key=ed8717a7e8e8309c8
 //Seleccionamos elementos del DOM
 const buttonElement = document.querySelector('#search');
 const inputElement = document.querySelector('#inputValue');
+const movieSearchable = document.querySelector('#movie-searchable');
 
 /*
             <section class="section-movie">
@@ -52,6 +53,9 @@ buttonElement.onclick = e => {
         .then((res) => res.json())
         .then((data) => {
             // data.results []
+            const movies = data.results;
+            const movieBlock = createMovie(movies);
+            movieSearchable.appendChild(movieBlock);
             console.log('Data: ', data);
         })
         .catch((error) => {
