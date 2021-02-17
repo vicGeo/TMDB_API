@@ -5,12 +5,12 @@ const buttonIdElement = document.querySelector('#searchId');
 const inputIdElement = document.querySelector('#inputValueId');
 const movieSearchable = document.querySelector('#movie-searchable');
 
-const url = 'http://api.themoviedb.org/3/search/movie?api_key=ed8717a7e8e8309c83f2ad4db5fbb610&language=es-ES';
+const url = 'https://api.themoviedb.org/3/search/movie?api_key=ed8717a7e8e8309c83f2ad4db5fbb610&language=es-ES';
 
 
 const getMovieHtml = movie => {
     return `<div class="section-movie">
-                <img src="http://image.tmdb.org/t/p/w500${movie.poster_path}">
+                <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}">
             </div>
             `
 };
@@ -27,7 +27,7 @@ const renderMoviesId = movies => {
     document.querySelector('#movie-searchable').innerHTML = '';
     document.querySelector('#movie-searchable').innerHTML+=
     `<div class="section-movie">
-        <img src="http://image.tmdb.org/t/p/w500${movies.poster_path}">
+        <img src="https://image.tmdb.org/t/p/w500${movies.poster_path}">
         <p>${movies.overview}</p>
     </div>`
 }
@@ -60,7 +60,7 @@ buttonIdElement.onclick = e => {
     e.preventDefault();
     const id = inputIdElement.value;
 
-    fetch(`http://api.themoviedb.org/3/movie/${id}?api_key=ed8717a7e8e8309c83f2ad4db5fbb610&language=es-ES`)
+    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=ed8717a7e8e8309c83f2ad4db5fbb610&language=es-ES`)
         .then((res) => res.json())
         .then(data => {
             const movies = data;
