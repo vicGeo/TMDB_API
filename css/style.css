@@ -40,18 +40,31 @@
     padding: .375rem .75rem;
 }
 
-.btn {
+.btn.btn-success {
     outline: none;
     border-radius: .25rem;
     /* font-weight: bold; */
+    margin: 10px;
+    height: 50px;
+}
+
+.buttonDisplay {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+#searchId {
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
 }
 
 .section-movie {
     margin-top: 1rem;
-    display: flex;
-    width: 100%;
-    overflow-x: auto;
-    background-color: #000;
+    /* display: flex; */
+    /* width: 100%; */
+    /* overflow-x: auto; */
 }
 
 .section-movie img {
@@ -60,6 +73,7 @@
     transform-origin: center center;
     filter: brightness(75%);
     padding: 2px;
+    border-radius: 10px;
 }
 
 .section-movie img:hover {
@@ -70,4 +84,7 @@
 
 #movie-searchable {
     margin-top: 1rem;
+    /* overflow-x: auto; */
+    /* width: 100%; */
+    display: flex;
 }

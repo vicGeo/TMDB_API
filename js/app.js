@@ -1,57 +1,38 @@
-//Claves de la API TMDB
-const API_KEY = 'ed8717a7e8e8309c83f2ad4db5fbb610';
-const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
-
-const url = 'https://api.themoviedb.org/3/search/movie?api_key=ed8717a7e8e8309c83f2ad4db5fbb610&language=es-ES';
-
-
 //Seleccionamos elementos del DOM
 const buttonElement = document.querySelector('#search');
 const inputElement = document.querySelector('#inputValue');
+const buttonIdElement = document.querySelector('#searchId');
+const inputIdElement = document.querySelector('#inputValueId');
 const movieSearchable = document.querySelector('#movie-searchable');
 
-/*
-            <section class="section-movie">
-                <img src="https://image.tmdb.org/t/p/w500/oZRlkaeMBwj6SByLNkBv8m8r6JU.jpg" movie-id="1">
-                <img src="https://image.tmdb.org/t/p/w500/245tgZ3mTHWs0NRiPSwPjKobKHf.jpg" movie-id="2">
-            </section>
-*/
+const url = 'http://api.themoviedb.org/3/search/movie?api_key=ed8717a7e8e8309c83f2ad4db5fbb610&language=es-ES';
 
-//Función para pintar las pelis en el DOM
 
-const movieSection = (movieRender) => {
-    return movieRender.map((movie) => {
-        if (movie.poster_path) {
-            return `<img src=${IMAGE_URL + movie.poster_path} movie-id=${movie.id}/>`;
-        }
-    });
+const getMovieHtml = movie => {
+    return `<div class="section-movie">
+                <img src="http://image.tmdb.org/t/p/w500${movie.poster_path}">
+            </div>
+            `
 };
 
+const renderMovies = movies => {
+    document.querySelector('#movie-searchable').innerHTML = '';
+    //Recorremos el array de pelis de la API
+    for (const movie of movies) {
+        document.querySelector('#movie-searchable').innerHTML += getMovieHtml(movie);
+    }
+};
 
-const createMovie = (movieRender) => {
-    const movieElement = document.createElement('div');
-    movieElement.setAttribute('class', 'movie');
-
-    const movieTemplate = `
-        <section class="section-movie">
-            ${movieSection(movieRender)}
-        </section>
-    `;
-
-    movieElement.innerHTML = movieTemplate;
-    return movieElement;
+const renderMoviesId = movies => {
+    document.querySelector('#movie-searchable').innerHTML = '';
+    document.querySelector('#movie-searchable').innerHTML+=
+    `<div class="section-movie">
+        <img src="http://image.tmdb.org/t/p/w500${movies.poster_path}">
+        <p>${movies.overview}</p>
+    </div>`
 }
 
-const renderMoviesSearch = (data) => {
-    // data.results []
-    movieSearchable.innerHTML = '';
-    const movies = data.results;
-    const movieBlock = createMovie(movies);
-    movieSearchable.appendChild(movieBlock);
-    console.log('Data: ', data);
-};
-
-//Función onclick
+//Función onclick nombre peliculas
 
 buttonElement.onclick = e => {
     e.preventDefault();
@@ -61,7 +42,10 @@ buttonElement.onclick = e => {
 
     fetch(newUrl)
         .then((res) => res.json())
-        .then(renderMoviesSearch)
+        .then(res => {
+            const movies = res.results;
+            renderMovies(movies);
+        })
         .catch((error) => {
             console.log('Error: ', error);
         });
@@ -69,3 +53,38 @@ buttonElement.onclick = e => {
     inputElement.value = '';
     console.log('Value: ', value);
 };
+
+//Función onclick ID
+
+buttonIdElement.onclick = e => {
+    e.preventDefault();
+    const id = inputIdElement.value;
+
+    fetch(`http://api.themoviedb.org/3/movie/${id}?api_key=ed8717a7e8e8309c83f2ad4db5fbb610&language=es-ES`)
+        .then((res) => res.json())
+        .then(data => {
+            const movies = data;
+            renderMoviesId(movies);
+        })
+
+    inputIdElement.value = '';
+}
+
+
+// const getMovieDetailed = movie_id => {
+//     axios.get(`http://api.themoviedb.org/3/movie/${movie_id}?api_key=ed8717a7e8e8309c83f2ad4db5fbb610&language=es-ES`)
+//         .then(res => {
+//             const movie = res.data;
+//             document.querySelector('#swiper-wrapper').innerHTML += getMovieDetailedHtml(movie);
+//         })
+//         .catch(console.error);
+// };
+
+// const getMovieDetailedHtml = movie => {
+//     return `<div class="swiper-slide">
+//                 <img src="http://image.tmdb.org/t/p/w500${movie.poster_path}">
+//                 <span>${movie.popularity}</span>
+//                 <p>${movie.overview}</p>
+//             </div>
+//             `
+// };
