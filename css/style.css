@@ -6,6 +6,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
 }
 
 .container-fluid {
@@ -40,6 +41,19 @@
     padding: .375rem .75rem;
 }
 
+#inputValueId {
+    width: 520px;
+    font-size: 1rem;
+    font-weight: 400;
+    font-size: 1rem;
+    margin-top: 1rem;
+    line-height: 1.5rem;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    outline: none;
+    padding: .375rem .75rem;
+}
+
 .btn.btn-success {
     outline: none;
     border-radius: .25rem;
@@ -49,7 +63,7 @@
 }
 
 .buttonDisplay {
-    display: flex;
+    flex-direction: row;
     align-content: center;
     justify-content: center;
 }
@@ -62,18 +76,21 @@
 
 .section-movie {
     margin-top: 1rem;
-    /* display: flex; */
-    /* width: 100%; */
-    /* overflow-x: auto; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .section-movie img {
-    width: 300px;
+    width: 250px;
+    height: 400px;
     transition: transform 1.5s, filter 1s ease-in-out;
     transform-origin: center center;
     filter: brightness(75%);
     padding: 2px;
     border-radius: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .section-movie img:hover {
@@ -84,7 +101,9 @@
 
 #movie-searchable {
     margin-top: 1rem;
-    /* overflow-x: auto; */
-    /* width: 100%; */
     display: flex;
+    overflow-x: auto;
+    width: 100%;
+    /* justify-content: center; */
+    /* align-items: center; */
 }
